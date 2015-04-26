@@ -5,6 +5,7 @@ ruby '2.0.0'
 gem 'pg'
 
 gem 'instagram'
+gem 'dotenv'
 
 # Sinatra driver
 gem 'sinatra'
