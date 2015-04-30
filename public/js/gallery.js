@@ -10,7 +10,7 @@ Gallery.prototype.loadMorePhotos = function() {
     $.ajax({
       url: '/user/photos',
       type: 'GET',
-      datatype: 'JSON'
+      dataType: 'JSON'
     }).done(function(response) {
       console.log(response);
     })
