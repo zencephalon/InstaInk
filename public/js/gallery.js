@@ -11,15 +11,23 @@ function Photo(data, gallery) {
 Photo.prototype.clickSelect = function() {
   this.selected = ! this.selected;
   this.$ele.toggleClass('selected');
+  this.gallery.updateSelectCounter();
 }
 
 function Gallery($ele) {
   this.$ele = $ele;
   this.next_max_id = false;
   this.$spinner = $('<img id="spinner" class="center" style="display:block" src="/img/spinner-small.gif">');
+  this.$selectCounter = $('<div id="gallery-counter"></div>');
+  this.$ele.parent().append(this.$selectCounter);
   this.photosLoaded = true;
   this.photos = [];
+  this.updateSelectCounter();
   this.loadMorePhotos();
+}
+
+Gallery.prototype.updateSelectCounter = function() {
+  this.$selectCounter.html("" + this.selectedPhotos().length + "/12 photos selected");
 }
 
 Gallery.prototype.selectedPhotos = function() {
