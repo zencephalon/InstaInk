@@ -27,7 +27,7 @@ Dotenv.load
 
 require 'instagram'
 
-CALLBACK_URL = "http://localhost:9393/oauth/callback"
+CALLBACK_URL = ENV['CALLBACK_URL']
 
 Instagram.configure do |config|
   config.client_id = ENV['CLIENT_ID']
