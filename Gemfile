@@ -6,6 +6,7 @@ gem 'pg'
 
 gem 'instagram'
 gem 'dotenv'
+gem 'pry'
 
 # Sinatra driver
 gem 'sinatra'
