@@ -18,7 +18,14 @@ function Gallery($ele) {
   this.next_max_id = false;
   this.$spinner = $('<img id="spinner" class="center" style="display:block" src="/img/spinner-small.gif">');
   this.photosLoaded = true;
+  this.photos = [];
   this.loadMorePhotos();
+}
+
+Gallery.prototype.selectedPhotos = function() {
+  return this.photos.filter(function(photo) {
+    return photo.selected;
+  })
 }
 
 Gallery.prototype.loadMorePhotos = function() {
@@ -38,7 +45,7 @@ Gallery.prototype.loadMorePhotos = function() {
       $('#spinner').remove();
 
       response.photos.forEach(function (photo) {
-        var photo = new Photo(photo, self);
+        self.photos.push(new Photo(photo, self));
       })
     })
   }
@@ -46,7 +53,7 @@ Gallery.prototype.loadMorePhotos = function() {
 
 
 $(document).ready(function() {
-  var gallery = new Gallery($('#gallery'));
+  gallery = new Gallery($('#gallery'));
 
   $(window).scroll(function() {
     if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
