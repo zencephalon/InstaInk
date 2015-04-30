@@ -2,8 +2,15 @@ function Photo(data, gallery) {
   this.data = data;
   this.gallery = gallery;
   console.log(this.data)
+  this.selected = false;
   this.$ele = $("<div class='box'><div class='boxInner'><img src='" + this.data.images.thumbnail.url + "'/></div></div>");
   this.gallery.$ele.append(this.$ele);
+  this.$ele.on('click', this.clickSelect.bind(this));
+}
+
+Photo.prototype.clickSelect = function() {
+  this.selected = ! this.selected;
+  this.$ele.toggleClass('selected');
 }
 
 function Gallery($ele) {
@@ -25,10 +32,11 @@ Gallery.prototype.loadMorePhotos = function() {
       data: {next_max_id: self.next_max_id},
       dataType: 'JSON'
     }).done(function(response) {
-      console.log(response);
       self.next_max_id = response.next_max_id;
+
       self.photosLoaded = true;
       $('#spinner').remove();
+
       response.photos.forEach(function (photo) {
         var photo = new Photo(photo, self);
       })
