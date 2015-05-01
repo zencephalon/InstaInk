@@ -1,3 +1,20 @@
+get '/admin' do
+  redirect '/login' unless current_user
+
+  @orders = Order.all
+
+  erb :'order/all'
+end
+
+get '/admin/order/:id' do |id|
+  redirect '/login' unless current_user
+
+  @order = Order.find(id)
+
+  erb :'order/admin_show'
+end
+
+
 post '/order' do
   order = Order.create
 

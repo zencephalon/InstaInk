@@ -1,0 +1,12 @@
+<table>
+<tr>
+<th>Order</th>
+<th>Processed</th>
+</tr>
+<% @orders.each do |order| %>
+  <tr>
+  <td><a href="/admin/order/<%= order.id %>">Order <%= order.id %></a></td>
+  <td>false</td>
+  </tr>
+<% end %>
+</table>
