@@ -9,16 +9,24 @@ function Photo(data, gallery) {
 }
 
 Photo.prototype.clickSelect = function() {
-  this.selected = ! this.selected;
-  this.$ele.toggleClass('selected');
-  this.gallery.updateSelectCounter();
+  if (this.selected || this.gallery.canSelectMore()) {
+    this.selected = ! this.selected;
+    this.$ele.toggleClass('selected');
+    this.gallery.updateSelectCounter();
+  }
 }
 
 function Gallery($ele) {
   this.$ele = $ele;
+  this.selectionMax = 12;
   this.next_max_id = false;
   this.$spinner = $('<img id="spinner" class="center" style="display:block" src="/img/spinner-small.gif">');
+
   this.$selectCounter = $('<div id="gallery-counter"></div>');
+  this.$selectCounter.on('click', 'a', function() {
+    console.log("Checkout!");
+  })
+
   this.$ele.parent().append(this.$selectCounter);
   this.photosLoaded = true;
   this.photos = [];
@@ -26,8 +34,17 @@ function Gallery($ele) {
   this.loadMorePhotos();
 }
 
+Gallery.prototype.canSelectMore = function() {
+  return this.selectedPhotos().length < this.selectionMax;
+}
+
 Gallery.prototype.updateSelectCounter = function() {
-  this.$selectCounter.html("" + this.selectedPhotos().length + "/12 photos selected");
+  var selected = this.selectedPhotos();
+  if (this.canSelectMore()) {
+    this.$selectCounter.html("" + this.selectedPhotos().length + "/" + this.selectionMax + " photos selected");
+  } else {
+    this.$selectCounter.html("<a>Continue to Checkout!</a>");
+  }
 }
 
 Gallery.prototype.selectedPhotos = function() {
