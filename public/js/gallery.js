@@ -1,26 +1,10 @@
-function Photo(data, gallery) {
-  this.data = data;
-  this.gallery = gallery;
-  console.log(this.data)
-  this.selected = false;
-  this.$ele = $("<div class='box'><div class='boxInner'><img src='" + this.data.images.thumbnail.url + "'/></div></div>");
-  this.gallery.$ele.append(this.$ele);
-  this.$ele.on('click', this.clickSelect.bind(this));
-}
-
-Photo.prototype.clickSelect = function() {
-  if (this.selected || this.gallery.canSelectMore()) {
-    this.selected = ! this.selected;
-    this.$ele.toggleClass('selected');
-    this.gallery.updateSelectCounter();
-  }
-}
-
 function Gallery($ele) {
   var self = this;
   this.$ele = $ele;
+
   this.selectionMax = 6;
   this.next_max_id = false;
+
   this.$spinner = $('<img id="spinner" class="center" style="display:block" src="/img/spinner-small.gif">');
 
   this.$selectCounter = $('<div id="gallery-counter"></div>');
@@ -36,8 +20,10 @@ function Gallery($ele) {
   })
 
   this.$ele.parent().append(this.$selectCounter);
+
   this.photosLoaded = true;
   this.photos = [];
+
   this.updateSelectCounter();
   this.loadMorePhotos();
 }
@@ -53,12 +39,6 @@ Gallery.prototype.updateSelectCounter = function() {
   } else {
     this.$selectCounter.html("<a>Continue to Checkout!</a>");
   }
-}
-
-Gallery.prototype.selectedPhotos = function() {
-  return this.photos.filter(function(photo) {
-    return photo.selected;
-  })
 }
 
 Gallery.prototype.loadMorePhotos = function() {
@@ -84,20 +64,15 @@ Gallery.prototype.loadMorePhotos = function() {
   }
 }
 
+Gallery.prototype.selectedPhotos = function() {
+  return this.photos.filter(function(photo) {
+    return photo.selected;
+  })
+}
+
 Gallery.prototype.selectedPhotoData = function() {
   var selected = this.selectedPhotos();
   return selected.map(function(photo) {
     return {url: photo.data.images.standard_resolution.url}
   })
 }
-
-$(document).ready(function() {
-  gallery = new Gallery($('#gallery'));
-
-  $(window).scroll(function() {
-    if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
-      console.log("Bottom!")
-      gallery.loadMorePhotos();
-    }
-  });
-})
