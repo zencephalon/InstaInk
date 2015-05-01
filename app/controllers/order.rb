@@ -14,6 +14,13 @@ get '/admin/order/:id' do |id|
   erb :'order/admin_show'
 end
 
+post '/admin/order/:id/process' do |id|
+  order = Order.find(id)
+  order.processed = ! order.processed
+  order.save
+
+  redirect '/admin'
+end
 
 post '/order' do
   order = Order.create

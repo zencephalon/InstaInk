@@ -1,0 +1,31 @@
+<a href="/admin">Back to Orders</a>
+
+<p>
+  Email: <%= @order.stripeEmail %>
+</p>
+
+<p>
+  Shipping: 
+  <pre>
+<%= @order.stripeShippingName %>
+
+<%= @order.stripeShippingAddressLine1 %> <%= @order.stripeShippingAddressApt %>
+
+<%= @order.stripeShippingAddressCity %> <%= @order.stripeShippingAddressState %> <%= @order.stripeShippingAddressZip %>
+
+<%= @order.stripeShippingAddressCountry %> <%= @order.stripeShippingAddressCountryCode %>
+  </pre>
+</p>
+
+<p>
+  Photos:
+  <ol>
+  <% @order.photos.each do |photo| %>
+    <li><a href="<%= photo.url %>">Photo</a></li>
+  <% end %>
+  </ol>
+</p>
+
+<form action="/admin/order/<%= @order.id %>/process" method="POST">
+  <input type="submit" value="Processed order!">
+</form>
