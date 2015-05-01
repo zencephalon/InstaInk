@@ -12,7 +12,7 @@ class CreateOrders < ActiveRecord::Migration
       t.string :stripeShippingAddressCountry
       t.string :stripeShippingAddressCountryCode
 
-      t.boolean :paid
+      t.boolean :paid, default: false
 
       t.timestamps
     end
