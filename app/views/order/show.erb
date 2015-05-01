@@ -1,0 +1,18 @@
+<% if @order.paid %>
+  Order already paid! Expect an email receipt when your order gets processed.
+<% else %>
+  <script src="https://checkout.stripe.com/checkout.js"></script>
+    
+  <form action="/order/<%= @order.id %>/paid" method="POST">
+    <script
+      src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+      data-key="pk_test_eoopBEZYB0FpuB8iLnLM3sfD"
+      data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+      data-name="InstaInked Tattoos"
+      data-description="12 Instant Tattoos ($20.00)"
+      data-amount="2000"
+      data-billingAddress="true"
+      data-shippingAddress="true">
+    </script>
+  </form>
+<% end %>
