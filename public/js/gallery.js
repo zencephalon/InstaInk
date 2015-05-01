@@ -17,13 +17,21 @@ Photo.prototype.clickSelect = function() {
 }
 
 function Gallery($ele) {
+  var self = this;
   this.$ele = $ele;
-  this.selectionMax = 12;
+  this.selectionMax = 6;
   this.next_max_id = false;
   this.$spinner = $('<img id="spinner" class="center" style="display:block" src="/img/spinner-small.gif">');
 
   this.$selectCounter = $('<div id="gallery-counter"></div>');
   this.$selectCounter.on('click', 'a', function() {
+    $.ajax({
+      url: '/order',
+      type: 'POST',
+      data: {photos: self.selectedPhotoData()}
+    }).done(function(response) {
+      window.location.replace(response);
+    })
     console.log("Checkout!");
   })
 
@@ -76,6 +84,12 @@ Gallery.prototype.loadMorePhotos = function() {
   }
 }
 
+Gallery.prototype.selectedPhotoData = function() {
+  var selected = this.selectedPhotos();
+  return selected.map(function(photo) {
+    return {url: photo.data.images.standard_resolution.url}
+  })
+}
 
 $(document).ready(function() {
   gallery = new Gallery($('#gallery'));
