@@ -5,6 +5,7 @@ ruby '2.0.0'
 gem 'pg'
 
 gem 'instagram'
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'dotenv'
 gem 'pry'
 

@@ -1,7 +1,9 @@
 <% if @order.paid %>
   Order already paid! Expect an email receipt when your order gets processed.
 <% else %>
-  <script src="https://checkout.stripe.com/checkout.js"></script>
+  <% if @error %>
+    <p><%= @error %>, please try again.</p>
+  <% end %>
     
   <form action="/order/<%= @order.id %>/paid" method="POST">
     <script

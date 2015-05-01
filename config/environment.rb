@@ -29,6 +29,9 @@ require 'instagram'
 
 CALLBACK_URL = ENV['CALLBACK_URL']
 
+require 'stripe'
+Stripe.api_key = ENV['STRIPE_SECRET']
+
 Instagram.configure do |config|
   config.client_id = ENV['CLIENT_ID']
   config.client_secret = ENV['CLIENT_SECRET']
