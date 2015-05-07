@@ -2,6 +2,7 @@ function Gallery($ele) {
   var self = this;
   this.$ele = $ele;
 
+  // 12
   this.selectionMax = 12;
   this.next_max_id = false;
 
