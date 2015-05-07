@@ -2,7 +2,7 @@ function Gallery($ele) {
   var self = this;
   this.$ele = $ele;
 
-  this.selectionMax = 6;
+  this.selectionMax = 12;
   this.next_max_id = false;
 
   this.$spinner = $('<img id="spinner" class="center" style="display:block" src="/img/spinner-small.gif">');
