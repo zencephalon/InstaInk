@@ -16,6 +16,9 @@ function Gallery($ele) {
       data: {photos: self.selectedPhotoData()}
     }).done(function(response) {
       self.$selectCounter.html(response);
+      setTimeout(function() {
+        $('.stripe-button-el').click();
+      }, 500);
     })
     console.log("Checkout!");
   })
