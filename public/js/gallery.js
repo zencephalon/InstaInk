@@ -15,7 +15,8 @@ function Gallery($ele) {
       type: 'POST',
       data: {photos: self.selectedPhotoData()}
     }).done(function(response) {
-      window.location.replace(response);
+      self.$selectCounter.html(response);
+      $('.stripe-button-el').click();
     })
     console.log("Checkout!");
   })

@@ -23,13 +23,13 @@ post '/admin/order/:id/process' do |id|
 end
 
 post '/order' do
-  order = Order.create
+  @order = Order.create
 
   params[:photos].each do |index, photo_data|
-    order.photos << Photo.create(photo_data)
+    @order.photos << Photo.create(photo_data)
   end
 
-  "/order/#{order.id}"
+  erb :'order/show', layout: false
 end
 
 post '/order/:id/paid' do |id|
