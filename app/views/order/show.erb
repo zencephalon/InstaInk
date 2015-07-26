@@ -8,7 +8,7 @@
   <form action="/order/<%= @order.id %>/paid" method="POST">
     <script
       src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-      data-key="<%= ENV["STRIPE_SECRET"] %>"
+      data-key="<%= ENV["STRIPE_PUBLIC_KEY"] %>"
       data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
       data-name="InstaInked Tattoos"
       data-description="12 Instant Tattoos ($10.00)"
