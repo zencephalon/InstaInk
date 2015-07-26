@@ -44,7 +44,7 @@ post '/order/:id/paid' do |id|
 
   begin
     charge = Stripe::Charge.create(
-      :amount => 2000, # amount in cents, again
+      :amount => 1000, # amount in cents, again
       :currency => "usd",
       :source => token,
       :description => "Instant Tattoos"
